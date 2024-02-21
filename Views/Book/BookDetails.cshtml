@@ -1,0 +1,26 @@
+﻿@model Book
+    <html>
+    <head>
+
+    </head>
+    <body>
+        @if (Model != null)
+            {
+        <h1>Book Details</h1>
+
+        <div>
+
+            <div>Title</div>
+            <div>@Model.Title</div>
+            <div>Title</div>
+            <div>@Model.ISBN</div>
+            
+            <a asp-action="borrowingBook" asp-controller="Book" asp-route-bookId="@Model.BookID">Borrow Book</a>
+        </div>
+            }
+            else
+{
+              <p>Book not found with ID: @ViewData["bookID"]</p>
+}
+    </body>
+</html>

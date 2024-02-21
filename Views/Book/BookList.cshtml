@@ -1,0 +1,36 @@
+﻿@model List<Book>
+
+
+    <html>
+    <head>
+        <link rel="stylesheet" href="~/css/bookList.css"/>
+    </head>
+    <body>
+        <h1>Available Books</h1>
+
+        <form asp-controller="Book" asp-action="BookSearch" method="get">
+            <input placeholder="Search By Title" />
+            <button type ="submit">Search</button>
+        </form>
+
+        <div class="bookList">
+            @foreach (Book book in Model)
+            
+                {
+                    
+                        <div class="bookItem">
+                            <a asp-controller="Book" asp-action="BookDetails" asp-route-bookID="@book.BookID">
+
+                                <img src="@book.photoUrl"/>
+
+                                <p>@book.Title</p>
+                                
+                            </a>
+                        </div>
+                    
+    }
+
+
+        </div>
+    </body>
+</html>
