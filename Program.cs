@@ -43,6 +43,10 @@ public class Program
 
         builder.Services.AddHttpContextAccessor();
 
+        builder.Services.AddSession();
+
+    
+
         //builder.Services.AddDefaultIdentity<User>()
         //    .AddSignInManager<LibraryDBContext>();
 
@@ -66,6 +70,8 @@ public class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseSession();
 
         app.MapControllerRoute(
             name: "default",

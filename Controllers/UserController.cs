@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Newtonsoft.Json;
+
 
 namespace LibrarySystem.Controllers
 {
@@ -19,21 +21,17 @@ namespace LibrarySystem.Controllers
         private readonly IUserRepository _userRepository;
         //private readonly SignInManager<User> _signInManager;
         private readonly IUserService _userService;
-        //private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-
-        //public UserController(IUserRepository userRepository, SignInManager<User> signInManager)
-        //{
-        //    _userRepository = userRepository;
-        //    _signInManager = signInManager;
-        //}
-
-        public UserController(IUserRepository userRepository, IUserService userService)
+        public UserController(IUserRepository userRepository, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
            
         }
+
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
 
         // Login actions
         public IActionResult Login()
@@ -46,15 +44,8 @@ namespace LibrarySystem.Controllers
         {
 
             User user = await _userService.signIn(model);
-            //var session = _httpContextAccessor.HttpContext.Session;
 
-            //session.SetString("loggedInUser", user.ToString());
-            //var user = await _userRepository.GetUserByEmail(model.Email);
 
-            //// Await the PasswordSignInAsync method to get the SignInResult
-            //var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-
-            // Now access the Succeeded property of the SignInResult
             if (user != null)
             {
                 var claims = new List<Claim> {
@@ -63,7 +54,14 @@ namespace LibrarySystem.Controllers
             };
                 var claimsIdentity = new ClaimsIdentity(claims, "Login");
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                return RedirectToAction("Index", "Home"); // Redirect to home page on successful login
+
+
+
+                var loggedinUser = JsonConvert.SerializeObject(user);
+
+                HttpContext.Session.SetString("currentUser", loggedinUser);
+
+                return RedirectToAction("Index", "Home", user); // Redirect to home page on successful login
             }
 
             ModelState.AddModelError("", "Invalid login credentials.");
@@ -82,13 +80,57 @@ namespace LibrarySystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                User saveduser = await _userService.signUp(user);
-                //await _signInManager.SignInAsync(user, false);
-                return RedirectToAction("Index", "Home"); // Redirect to home page on successful signup
+                User savedUser = await _userService.signUp(user);
+                if (savedUser != null)
+                {
+                    // Optionally sign in the user after successful signup
+                    // await _signInManager.SignInAsync(savedUser, false);
+                    return RedirectToAction("Login", "User"); // Redirect to home page on successful signup
+                }
+                else
+                {
+                    // Handle error if user signup fails
+                    ModelState.AddModelError(string.Empty, "Failed to signup user.");
+                    return View(user);
+                }
             }
             return View(user);
         }
-       
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            // Sign out the user
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Clear the session
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home"); // Redirect to home page after logout
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserProfile()
+        {
+            // Get the current user's profile
+            // Assuming you have a method in your IUserService to retrieve user profile
+            //User user = await _userService.GetCurrentUser();
+
+            var currentUserJson = HttpContext.Session.GetString("currentUser");
+            User currentUser = null;
+
+            if (currentUserJson != null)
+            {
+                currentUser = JsonConvert.DeserializeObject<User>(currentUserJson);
+            }
+
+            if (currentUser == null)
+            {
+                return NotFound(); // User not found
+            }
+            return View(currentUser);
+        }
+
         //public async Task<IActionResult> BorrowedBooks(int Id)
         //{
         //    User foundUser = await _userService.GetUserById(Id);
@@ -98,7 +140,7 @@ namespace LibrarySystem.Controllers
 
         //    return View(books);
 
-            
+
         //}
     }
 }

@@ -26,29 +26,45 @@ namespace LibrarySystem.Services
 
 		public async Task<User> signIn(LoginViewModel model)
 		{
-            User founduser = await _userRepository.GetUserByEmail(model.Email);
+            User foundUser = await _userRepository.GetUserByEmail(model.Email);
 
-            if (founduser == null)
-			{
-				throw new Exception("User not found");
-			}
-			if (!founduser.PasswordHash.Equals(model.PasswordHash)){
-				throw new Exception("Wrong password");
-			}
+            if (foundUser == null)
+            {
+                throw new Exception("User not found");
+            }
 
-			return founduser;
-		}
+            // Hash the password using the stored salt and verify against the stored hashed password
+            byte[] hashedPassword = KeyDerivation.Pbkdf2(
+                password: model.PasswordHash,
+                salt: foundUser.PasswordSalt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8); // Generate a 256-bit hash
+
+            string hashedPasswordString = Convert.ToBase64String(hashedPassword);
+
+            if (!foundUser.PasswordHash.Equals(hashedPasswordString))
+            {
+                throw new Exception("Wrong password");
+            }
+
+            return foundUser;
+        }
 
         public async Task<User> signUp(User user)
         {
-            //PBKDF2: password based key derivation function
+            // Ensure the password is not null before hashing
+            if (string.IsNullOrWhiteSpace(user.PasswordHash))
+            {
+                throw new ArgumentException("Password cannot be null or empty.", nameof(user.PasswordHash));
+            }
+
             // Generate a strong salt using a cryptographically secure random number generator
-            byte[] salt = KeyDerivation.Pbkdf2(
-                password: null, // No password required as we're generating a salt
-                salt: null,      // No existing salt needed
-                prf: KeyDerivationPrf.HMACSHA256, // Use a strong PRF
-                iterationCount: 100000,        // Adjust iteration count as needed
-                numBytesRequested: 16);        // Generate 16-byte salt
+            byte[] salt = new byte[16];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
 
             // Hash the password using PBKDF2 with the generated salt
             byte[] hashedPassword = KeyDerivation.Pbkdf2(

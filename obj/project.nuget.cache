@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0Lgm6qBUDpXTa+Y+yym857omWgOstN56cD2ShhyIhSqVb6QuCB3y1dMzD0pJnn3XXqhU7kZxhiXaHkdTQP7IIQ==",
+  "dgSpecHash": "9JhUAvITW1H/cfCeWNNN5l5PRialI+ujVY/FcWV4rvhJ93Z2TjJI6bYYS3sjTCFeMKw82ApWa5L+pqilIZih7g==",
   "success": true,
   "projectFilePath": "/Users/nkazi/Projects/LibrarySystem/LibrarySystem/LibrarySystem.csproj",
   "expectedPackageFiles": [
@@ -58,6 +58,7 @@
     "/Users/nkazi/.nuget/packages/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg.sha512",
     "/Users/nkazi/.nuget/packages/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "/Users/nkazi/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/nkazi/.nuget/packages/newtonsoft.json/7.0.1/newtonsoft.json.7.0.1.nupkg.sha512",
     "/Users/nkazi/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/Users/nkazi/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/Users/nkazi/.nuget/packages/system.configuration.configurationmanager/5.0.0/system.configuration.configurationmanager.5.0.0.nupkg.sha512",
@@ -115,6 +116,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Newtonsoft.Json 7.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Newtonsoft.Json",
       "targetGraphs": [
         "net7.0"
       ]

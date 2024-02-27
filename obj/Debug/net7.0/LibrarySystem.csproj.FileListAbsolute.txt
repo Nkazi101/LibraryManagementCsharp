@@ -79,3 +79,4 @@
 /Users/nkazi/Projects/LibrarySystem/LibrarySystem/bin/Debug/net7.0/Microsoft.AspNet.Identity.EntityFramework.dll
 /Users/nkazi/Projects/LibrarySystem/LibrarySystem/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.UI.dll
 /Users/nkazi/Projects/LibrarySystem/LibrarySystem/obj/Debug/net7.0/LibrarySystem.MvcApplicationPartsAssemblyInfo.cs
+/Users/nkazi/Projects/LibrarySystem/LibrarySystem/bin/Debug/net7.0/Newtonsoft.Json.dll
