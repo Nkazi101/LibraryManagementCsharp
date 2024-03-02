@@ -8,6 +8,7 @@ using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using LibrarySystem.Repository;
 using LibrarySystem.Services;
+using Stripe;
 
 namespace LibrarySystem;
 
@@ -45,7 +46,8 @@ public class Program
 
         builder.Services.AddSession();
 
-    
+        //StripeConfiguration.SetApiKey(builder.Configuration.GetSection("Stripe")["SecretKey"]);
+
 
         //builder.Services.AddDefaultIdentity<User>()
         //    .AddSignInManager<LibraryDBContext>();

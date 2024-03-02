@@ -14,6 +14,8 @@ namespace LibrarySystem.Models
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<BookCart> BookCarts { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         public LibraryDBContext(DbContextOptions<LibraryDBContext> options)
             : base(options)

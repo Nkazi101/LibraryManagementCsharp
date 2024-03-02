@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WfhPudmLhphJcaij/6RIaVipnvYrzp5KJDm8YUWw6co=",
+  "Hash": "CN/O6L3fv5E9NwtY7exEIXVk7PNrclCT09BO1L5kkWs=",
   "Source": "LibrarySystem",
   "BasePath": "_content/LibrarySystem",
   "Mode": "Default",
@@ -1086,6 +1086,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/bookList.css"
+    },
+    {
+      "Identity": "/Users/nkazi/Projects/LibrarySystem/LibrarySystem/wwwroot/css/login.css",
+      "SourceId": "LibrarySystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nkazi/Projects/LibrarySystem/LibrarySystem/wwwroot/",
+      "BasePath": "_content/LibrarySystem",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/login.css"
     },
     {
       "Identity": "/Users/nkazi/Projects/LibrarySystem/LibrarySystem/wwwroot/css/site.css",

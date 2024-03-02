@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/css/bookList.css"
     },
     {
+      "Id": "/Users/nkazi/Projects/LibrarySystem/LibrarySystem/wwwroot/css/login.css",
+      "PackagePath": "staticwebassets/css/login.css"
+    },
+    {
       "Id": "/Users/nkazi/Projects/LibrarySystem/LibrarySystem/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
