@@ -14,7 +14,7 @@ namespace LibrarySystem.Models
 		[Key]
 		public int CartID { get; set; }
 
-		public List<BookCart> booksinCart { get; set; }
-	}
+		public List<BookCart> booksinCart { get; set; } 
+}
 }
 

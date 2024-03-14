@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using LibrarySystem.Repository;
 using LibrarySystem.Services;
 using Stripe;
+using LibrarySystem.StripeConfig;
 
 namespace LibrarySystem;
 
@@ -42,9 +43,17 @@ public class Program
 
         builder.Services.AddScoped<IBookService, BookService>();
 
+        builder.Services.AddScoped<CartService>();
+
         builder.Services.AddHttpContextAccessor();
 
         builder.Services.AddSession();
+
+        builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+        //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+        //builder.Services.AddSingleton<StripePaymentService>();
+
+        //builder.Services.AddScoped<StripePaymentService>();
 
         //StripeConfiguration.SetApiKey(builder.Configuration.GetSection("Stripe")["SecretKey"]);
 

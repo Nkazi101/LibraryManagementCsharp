@@ -1,0 +1,32 @@
+﻿@model List<BookCart>
+
+<h2>Shopping Cart</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <ul>
+        @foreach (BookCart item in Model)
+        {
+            if (item.Book != null)
+            {
+                <li>
+                    @item.Book.Title - @item.Book.ISBN
+                    <form method="post" asp-controller="Cart" asp-action="removeFromCart" asp-route-bookID="@item.BookID">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li>Unknown Title - Unknown ISBN</li>
+            }
+        }
+    </ul>
+    <a asp-action="CreateCheckout" asp-controller="Stripe">Checkout</a>
+}
+
+<a asp-action="Index" class="btn btn-primary">Continue Shopping</a>

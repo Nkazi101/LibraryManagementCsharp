@@ -11,6 +11,7 @@ namespace LibrarySystem.Models
 		{
 		}
 
+		
 		//fields
 		[Key]
 		public int BookID { get; set; }
@@ -26,6 +27,8 @@ namespace LibrarySystem.Models
         public DateTime DateBorrowed { get; set; }
    
         public string photoUrl { get; set; }
+
+		public double Price { get; set; }
 
 
 

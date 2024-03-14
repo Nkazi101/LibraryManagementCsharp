@@ -14,7 +14,8 @@
             <div>@Model.Title</div>
             <div>Title</div>
             <div>@Model.ISBN</div>
-            
+
+            <a asp-action="addToCart" asp-controller="Cart" asp-route-bookId="@Model.BookID">Add To Cart</a>
             <a asp-action="borrowingBook" asp-controller="Book" asp-route-bookId="@Model.BookID">Borrow Book</a>
         </div>
             }
